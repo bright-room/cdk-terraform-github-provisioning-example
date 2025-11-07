@@ -1,0 +1,39 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "timezone": "Asia/Tokyo",
+  "reviewers": ["team:administrator-owner", "team:developer-fte"],
+  "labels": ["dependencies", "renovate"],
+  "schedule": ["after 9am on saturday", "before 12am on saturday"],
+  "prConcurrentLimit": 0,
+  "prHourlyLimit": 0,
+  "separateMinorPatch": true,
+  "dependencyDashboard": true,
+  "automerge": false,
+  "rangeStrategy": "bump",
+  "major": {
+    "stabilityDays": 7
+  },
+  "minor": {
+    "stabilityDays": 3
+  },
+  "patch": {
+    "stabilityDays": 3
+  },
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["patch", "minor"],
+      "excludePackageNames": ["typescript"],
+      "groupName": "minor and patch dependencies"
+    },
+    {
+      "groupName": "github actions families",
+      "matchManagers": ["github-actions"],
+      "matchPackageNames": ["actions{/,}**"]
+    },
+    {
+      "matchUpdateTypes": ["patch", "minor"],
+      "automerge": true
+    }
+  ]
+}
